@@ -196,7 +196,8 @@
         <source src="static/videos/main_video.mp4" type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        Video presentation of the paper. Composed of: methodlogy overview, baseline comparisons, and ablation study.
+        Video presentation of the paper. <br>
+        Composed of: methodology overview, baseline comparisons, and ablation study.
       </h2>
     </div>
   </div>
@@ -221,34 +222,121 @@
 <!-- End paper abstract -->
 
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <img src="static/images/carousel1.png" alt="PC-Diffuser framework overview" style="display: block; margin: 0 auto;" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Overview of the proposed PC-Diffuser safety augmentation framework.
-        </h2>
+<!-- Tabbed figure sections (Methodology / Results) -->
+<style>
+  .fig-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .fig-tab {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 9999px;
+    background: #dceafe;
+    color: #1f3a63;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .fig-tab:hover { background: #c9ddfb; }
+  .fig-tab.is-active {
+    background: #2b2f42;
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  }
+  .fig-card {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 1.75rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .fig-panel { display: none; }
+  .fig-panel.is-active { display: block; }
+  .fig-panel img { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .fig-panel .fig-caption {
+    margin-top: 1rem;
+    text-align: center;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+</style>
+
+<!-- Methodology -->
+<section class="section" id="methodology">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Methodology</h2>
+    <div class="fig-tabs" role="tablist" data-figgroup="methodology">
+      <button class="fig-tab is-active" data-target="method-0">Framework overview</button>
+      <button class="fig-tab" data-target="method-1">Capsule distance</button>
+    </div>
+    <div class="fig-card">
+      <div class="fig-panel is-active" id="method-0">
+        <img src="static/images/carousel1.png" alt="PC-Diffuser framework overview" loading="lazy"/>
+        <p class="fig-caption">Overview of the proposed PC-Diffuser safety augmentation framework.</p>
       </div>
-      <div class="item">
-        <img src="static/images/carousel2.png" alt="Capsule distance diagram" style="max-width: 50%; margin: 0 auto; display: block;" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Capsule distance diagram: each vehicle is represented by its longitudinal axis, and the capsule distance is the minimum distance between segments minus the sum of half-widths.
-        </h2>
-      </div>
-      <div class="item">
-        <img src="static/images/carousel3.png" alt="Slack activation comparison" style="max-width: 50%; margin: 0 auto; display: block;" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Average slack activation rate (%) across denoising steps. Iterative PC-CBF shows monotonically decreasing corrections, indicating convergence to a safe trajectory.
-        </h2>
+      <div class="fig-panel" id="method-1">
+        <img src="static/images/carousel2.png" alt="Capsule distance diagram" style="max-width: 60%;" loading="lazy"/>
+        <p class="fig-caption">Capsule distance diagram: each vehicle is represented by its longitudinal axis, and the capsule distance is the minimum distance between segments minus the sum of half-widths.</p>
       </div>
     </div>
   </div>
-</div>
 </section>
-<!-- End image carousel -->
+<!-- End methodology -->
+
+<!-- Results -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <div class="fig-tabs" role="tablist" data-figgroup="results">
+      <button class="fig-tab is-active" data-target="result-0">Main results</button>
+      <button class="fig-tab" data-target="result-1">Ablation</button>
+      <button class="fig-tab" data-target="result-2">Slack activation</button>
+    </div>
+    <div class="fig-card">
+      <div class="fig-panel is-active" id="result-0">
+        <img src="static/images/table1_results.png" alt="Table I: Closed-loop results on the all-collision challenge set" loading="lazy"/>
+        <p class="fig-caption">Table I: Closed-loop results on the all-collision challenge set. PC-Diffuser achieves the lowest collision rate (10.29%) and highest composite score (0.59), satisfying safety, dynamic feasibility, and path consistency.</p>
+      </div>
+      <div class="fig-panel" id="result-1">
+        <img src="static/images/table2_ablation.png" alt="Table II: Ablation study on the all-collision challenge set" style="max-width: 80%;" loading="lazy"/>
+        <p class="fig-caption">Table II: Ablation study on the all-collision challenge set. Each row excludes one component; removing dynamic feasibility hurts most (21.32% collision rate), and the full PC-Diffuser performs best.</p>
+      </div>
+      <div class="fig-panel" id="result-2">
+        <img src="static/images/carousel3.png" alt="Slack activation comparison" style="max-width: 70%;" loading="lazy"/>
+        <p class="fig-caption">Average slack activation rate (%) across denoising steps. Iterative PC-CBF shows monotonically decreasing corrections, indicating convergence to a safe trajectory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End results -->
+
+<script>
+  document.querySelectorAll('.fig-tabs').forEach(function (group) {
+    var tabs = group.querySelectorAll('.fig-tab');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var targetId = tab.getAttribute('data-target');
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        // Panels live in the sibling .fig-card of this tab group
+        var card = group.parentElement.querySelector('.fig-card');
+        card.querySelectorAll('.fig-panel').forEach(function (panel) {
+          panel.classList.toggle('is-active', panel.id === targetId);
+        });
+      });
+    });
+  });
+</script>
+<!-- End tabbed figure sections -->
 
 
 <!--BibTex citation -->
